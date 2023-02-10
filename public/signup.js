@@ -19,9 +19,12 @@ form.addEventListener('submit',async(e)=>{
      const res =  await axios.post("http://localhost:3000/user/signup",obj);
       document.body.innerHTML =  document.body.innerHTML + ` ${res.data.message}`;
 
+      window.alert("Successfully signed up");
+
     }
     catch(err){
         console.log(err);
-        document.body.innerHTML =  document.body.innerHTML + ` ${err}`;
+        document.body.innerHTML =  document.body.innerHTML + 'user already exist';
+        window.alert("User already exists, Please Login");
     }
 });

@@ -22,18 +22,20 @@ exports.postUser = (req,res,next)=>{
         }
 
        bcrypt.hash(password,10,async(err,hash)=>{
-         await User.create({
+const response = await User.create({
             name:user,
             email:email,
             phone:phone,
             password:hash
          })
-         return res.status(201).json({message: "Successfully created new user"});
+         
+          res.status(201).json({message: "Successfully created new user"});
        })
 
     }
-    catch(err){
-     return res.status(500).json({message:'user already exist'});
+    catch(error){
+        console.log(err);
+      res.status(404).json({message:'user already exist'});
     };
 
 
