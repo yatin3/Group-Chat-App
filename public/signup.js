@@ -20,6 +20,7 @@ form.addEventListener('submit',async(e)=>{
       document.body.innerHTML =  document.body.innerHTML + ` ${res.data.message}`;
 
       window.alert("Successfully signed up");
+      window.location.href = './login.html'
 
     }
     catch(err){
