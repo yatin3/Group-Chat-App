@@ -14,7 +14,8 @@ form.addEventListener('submit',async(e)=>{
 
         console.log(obj);
 
-        //await axios.post("http://localhost:3000/user/signup",obj);
+  const response = await axios.post("http://localhost:3000/user/login",obj);
+  console.log(response);
     }
     catch(error){
       console.log(error);
