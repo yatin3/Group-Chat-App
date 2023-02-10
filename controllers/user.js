@@ -41,9 +41,9 @@ const response = await User.create({
 
 };
 
-function generateAccessToken(id){
+function generateAccessToken(id,name){
    
-    return jwt.sign({userId:id},process.env.TOKEN_KEY);
+    return jwt.sign({userId:id, name:name},process.env.TOKEN_KEY);
 }
 
 exports.checkUser = async (req,res,next)=>{
@@ -66,7 +66,7 @@ exports.checkUser = async (req,res,next)=>{
                     throw new error("Something went wrong");
                 }
                 if(result === true){
-                     return res.status(201).json({message:"User LoggedIn Successfully",token:generateAccessToken(user.id)})
+                     return res.status(201).json({message:"User LoggedIn Successfully",token:generateAccessToken(user.id,user.name)})
                 }
                 else{
                     return res.status(401).json({message:"User not Authorized",success:false});
