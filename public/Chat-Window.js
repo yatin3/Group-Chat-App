@@ -27,12 +27,59 @@ form.addEventListener('submit',async(e)=>{
         console.log(response);
         console.log(count);
       
-        const child1 = document.createElement('li');
-        child1.appendChild(document.createTextNode(response.data.message));
+    //     const child1 = document.createElement('li');
+    //     child1.appendChild(document.createTextNode(response.data.message));
 
-        if(count%2 === 0){
+    //     if(count%2 === 0){
 
 
+    //             child1.style.backgroundColor = '#ccc';
+    //         }else{
+    //             child1.style.backgroundColor = '#f4f4f4';
+    //         }
+    
+    //         message.appendChild(child1);
+    //     }
+    }
+    catch(error){
+       console.log(error);
+    }
+   
+});
+
+// window.addEventListener('DOMContentLoaded',async () => {
+
+//     const token = localStorage.getItem('token');
+
+//     const Chats = await axios.get("http://localhost:3000/chat/getChats",{ headers: {"Authorization": token}});
+
+//     for(let i=0; i<Chats.data.length; i++){
+        
+//         const child1 = document.createElement('li');
+//         child1.appendChild(document.createTextNode(Chats.data[i].message));
+//         if(i%2 === 0){
+//             child1.style.backgroundColor = '#ccc';
+//         }else{
+//             child1.style.backgroundColor = '#f4f4f4';
+//         }
+
+//         message.appendChild(child1);
+//     }
+// })
+
+setInterval(async ()=>{
+ 
+    const token = localStorage.getItem('token');
+
+    message.innerHTML = '';
+
+        const Chats = await axios.get("http://localhost:3000/chat/getChats",{ headers: {"Authorization": token}});
+    
+        for(let i=0; i<Chats.data.length; i++){
+            
+            const child1 = document.createElement('li');
+            child1.appendChild(document.createTextNode(Chats.data[i].message));
+            if(i%2 === 0){
                 child1.style.backgroundColor = '#ccc';
             }else{
                 child1.style.backgroundColor = '#f4f4f4';
@@ -40,29 +87,5 @@ form.addEventListener('submit',async(e)=>{
     
             message.appendChild(child1);
         }
-    
-    catch(error){
-       console.log(error);
-    }
-   
-});
 
-window.addEventListener('DOMContentLoaded',async () => {
-
-    const token = localStorage.getItem('token');
-
-    const Chats = await axios.get("http://localhost:3000/chat/getChats",{ headers: {"Authorization": token}});
-
-    for(let i=0; i<Chats.data.length; i++){
-        
-        const child1 = document.createElement('li');
-        child1.appendChild(document.createTextNode(Chats.data[i].message));
-        if(i%2 === 0){
-            child1.style.backgroundColor = '#ccc';
-        }else{
-            child1.style.backgroundColor = '#f4f4f4';
-        }
-
-        message.appendChild(child1);
-    }
-})
+},1000);
