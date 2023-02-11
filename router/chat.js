@@ -7,4 +7,9 @@ const userAuthentication = require('../middleware/auth');
 
 router.post('/addChat',userAuthentication.authenticate,chatController.postChat);
 
+router.get('/getChats',userAuthentication.authenticate,chatController.getAllChats);
+
+router.get('/getCount',userAuthentication.authenticate,chatController.getCounts);
+
+
 module.exports = router;

@@ -20,3 +20,28 @@ exports.postChat = async (req,res,next)=>{
     }
 
 };
+
+exports.getAllChats = async (req,res,next)=>{
+   
+    try{
+        const Chats = await Chat.findAll();
+        
+        res.status(201).json(Chats);
+
+    }
+    catch(error){
+        res.status(404).json(error);
+    }
+};
+
+exports.getCounts = async (req,res,next)=>{
+  
+    try{
+      
+        const counts = await Chat.count();
+        res.status(201).json(counts);
+    }
+    catch(error){
+        res.status(404).json(error);
+    }
+};
