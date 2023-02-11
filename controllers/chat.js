@@ -1,6 +1,8 @@
 const { resolve } = require('path/win32');
 const Chat = require('../models/chat');
 
+const { Op } = require("sequelize");
+
 exports.postChat = async (req,res,next)=>{
     
     try{
@@ -24,7 +26,16 @@ exports.postChat = async (req,res,next)=>{
 exports.getAllChats = async (req,res,next)=>{
    
     try{
-        const Chats = await Chat.findAll();
+
+        const id = req.query.getFrom;
+        const Chats = await Chat.findAll({where:{
+            id:{
+                [Op.gt]:id
+            }
+        }
+    });
+
+    console.log(Chats);
         
         res.status(201).json(Chats);
 

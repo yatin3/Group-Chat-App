@@ -5,7 +5,7 @@ exports.authenticate = async(req,res,next)=>{
 
     try{
         const token = req.header('Authorization');
-
+        
         const userIdentity = jwt.verify(token,process.env.TOKEN_KEY);
 
         const user = await User.findByPk(userIdentity.userId);

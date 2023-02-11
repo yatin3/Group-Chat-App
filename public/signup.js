@@ -29,3 +29,14 @@ form.addEventListener('submit',async(e)=>{
         window.alert("User already exists, Please Login");
     }
 });
+
+// const form = document.querySelector('form');
+
+// form.addEventListener('submit',(e)=>{
+
+//   e.preventDefault();
+
+// const array = [{id:1,message:"hello"},{id:2,message:"yatin"}];
+// localStorage.setItem('chat',JSON.stringify(array));
+// window.location.href = './login.html'
+// });

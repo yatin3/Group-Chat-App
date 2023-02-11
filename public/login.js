@@ -17,6 +17,7 @@ form.addEventListener('submit',async(e)=>{
   const response = await axios.post("http://localhost:3000/user/login",obj);
   localStorage.setItem('token',response.data.token);
   window.location.href = './Chat-Window.html'
+ // console.log(localStorage.getItem('token'));
   console.log(response);
     }
     catch(error){
