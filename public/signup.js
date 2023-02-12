@@ -30,13 +30,3 @@ form.addEventListener('submit',async(e)=>{
     }
 });
 
-// const form = document.querySelector('form');
-
-// form.addEventListener('submit',(e)=>{
-
-//   e.preventDefault();
-
-// const array = [{id:1,message:"hello"},{id:2,message:"yatin"}];
-// localStorage.setItem('chat',JSON.stringify(array));
-// window.location.href = './login.html'
-// });

@@ -23,17 +23,33 @@ exports.postChat = async (req,res,next)=>{
 
 };
 
+// exports.getAllChats = async (req,res,next)=>{
+   
+//     try{
+
+//         const id = req.query.getFrom;
+//         const Chats = await req.user.getChats({where:{
+//             id:{
+//                 [Op.gt]:id
+//             }
+//         }
+//     });
+
+//     console.log(Chats);
+        
+//         res.status(201).json(Chats);
+
+//     }
+//     catch(error){
+//         res.status(404).json(error);
+//     }
+// };
+
 exports.getAllChats = async (req,res,next)=>{
    
     try{
 
-        const id = req.query.getFrom;
-        const Chats = await Chat.findAll({where:{
-            id:{
-                [Op.gt]:id
-            }
-        }
-    });
+        const Chats = await req.user.getChats();
 
     console.log(Chats);
         
@@ -51,6 +67,25 @@ exports.getCounts = async (req,res,next)=>{
       
         const counts = await Chat.count();
         res.status(201).json(counts);
+    }
+    catch(error){
+        res.status(404).json(error);
+    }
+};
+
+
+exports.postGroupChat = async(req,res,next)=>{
+   
+    try{
+        const id = req.query.id;
+       const chat = req.body.chat;
+
+        const chats = await req.user.createChat({
+            message:chat,
+            GroupId:id
+        })
+
+        res.status(201).json(chats);
     }
     catch(error){
         res.status(404).json(error);

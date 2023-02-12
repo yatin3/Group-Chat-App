@@ -11,7 +11,14 @@
 </head>
 <body>
     <h1>Chat App</h1>
-    <ul id="message">
+
+    <h2 style="color:#ccaa7e">personal mesage</h2>
+    <ul id="message1">
+       
+    </ul>
+
+    <h2 style="color:#5F9EA0">Group mesage</h2>
+    <ul id="message2">
        
     </ul>
 
@@ -28,7 +35,22 @@
 
    
     </form>
-            
+
+    <button type="button" class="btn btn-primary" id="create">Create group</button>
+    <button type="button" class="btn btn-primary" id="join">join group</button>
+
+    <form id="form">
+         <div class="form-group">
+         <input type="hidden" id="group-message" name="chatty" required>
+         <button type="submit" style="visibility:hidden;" class="btn btn-primary" id="button">group-message-create</button>
+         </div>
+  </form>
+
+  <div id="groups">
+
+  </div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="Chat-Window.js"></script>
 </body>

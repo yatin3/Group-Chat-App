@@ -11,5 +11,7 @@ router.get('/getChats',userAuthentication.authenticate,chatController.getAllChat
 
 router.get('/getCount',userAuthentication.authenticate,chatController.getCounts);
 
+router.post('/addGroupChat',userAuthentication.authenticate,chatController.postGroupChat);
+
 
 module.exports = router;
