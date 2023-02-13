@@ -13,7 +13,8 @@ exports.createGroup = async(req,res)=>{
 
         const usergroup =  await userGroup.create({
             UserId:req.user.id,
-            GroupId:group.id
+            GroupId:group.id,
+            Admin:true
         })
     
         res.status(201).json({message:"successfully created group",group,usergroup});
@@ -64,7 +65,7 @@ exports.joinGroup = async(req,res)=>{
         const id = req.body.id;
        const group =  await userGroup.create({
             UserId:req.user.id,
-            GroupId:id
+            GroupId:id,
         })
 
         res.status(201).json(group);
@@ -86,3 +87,95 @@ exports.getAllGroups = async(req,res)=>{
         res.status(500).json(error);
     }
 }
+
+exports.IsAdmin = async(req,res)=>{
+
+    try{
+        
+    const usergroup = await userGroup.findAll({
+            where:{
+                UserId:req.user.id,
+                Admin:true
+            }
+        })
+        console.log(usergroup);
+        res.status(200).json(usergroup);
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+exports.AddUserToGroup = async(req,res)=>{
+    
+    try{
+        const groupId = req.body.groupId;
+        const userId = req.body.userId;
+
+        console.log(groupId,userId);
+
+        const usergroup = await userGroup.create({
+          
+            UserId:userId,
+            GroupId:groupId,
+        });
+
+        res.status(201).json(usergroup,{message:"successfully added user to group"});
+    
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json(error);
+    }
+
+};
+
+exports.makeAdmin = async(req,res)=>{
+    
+    try{
+       
+        const groupId = req.body.groupId;
+        const userId = req.body.userId;
+
+        const usergroup = await userGroup.update(
+
+            {
+                Admin:true,
+            },
+            {
+                where:{
+                    UserId:userId,
+                    GroupId:groupId
+                }
+            }
+        );
+
+        res.status(201).json({usergroup,message:"successfullt updated user admin"})
+    }
+    catch(error){
+        console.log(error);
+       res.status(500).json(error);
+    }
+};
+
+exports.deleteUser = async(req,res)=>{
+  
+    try{
+        const groupId = req.body.groupId;
+        const userId = req.body.userId;
+        
+        const usergroup = await userGroup.destroy({
+            where:{
+                UserId:userId,
+                GroupId:groupId
+            }
+        });
+      
+        res.status(201).json({usergroup, message:"successfully deleted user from group"});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json(error);
+    }
+};

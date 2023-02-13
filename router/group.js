@@ -15,4 +15,12 @@ router.post('/joinGroup',userAuthentication.authenticate,groupController.joinGro
 
 router.get('/getAllGroups',userAuthentication.authenticate,groupController.getAllGroups);
 
+router.get('/isAdmin',userAuthentication.authenticate,groupController.IsAdmin);
+
+router.post('/AddUser',userAuthentication.authenticate,groupController.AddUserToGroup);
+
+router.post('/makeAdmin',userAuthentication.authenticate,groupController.makeAdmin);
+
+router.post('/deleteUser',userAuthentication.authenticate,groupController.deleteUser);
+
 module.exports = router;

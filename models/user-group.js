@@ -9,6 +9,7 @@ const userGroup = sequelize.define('UserGroup',{
         allowNull:false,
         primaryKey:true
     },
+    Admin:Sequelize.STRING
 });
 
 module.exports = userGroup;

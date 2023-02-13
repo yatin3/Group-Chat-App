@@ -81,3 +81,16 @@ exports.checkUser = async (req,res,next)=>{
         return res.status(500).json(err);
     }
 };
+
+exports.getAllUser = async(req,res,next)=>{
+
+    try{
+       const Users = await User.findAll();
+
+       return res.status(200).json(Users);
+
+    }
+    catch(error){
+        return res.status(500).json(err);
+    }
+}

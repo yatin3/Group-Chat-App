@@ -49,7 +49,12 @@ exports.getAllChats = async (req,res,next)=>{
    
     try{
 
-        const Chats = await req.user.getChats();
+        const Chats = await Chat.findAll({
+            where:{
+                UserId:req.user.id,
+                GroupId:null
+            }
+        });
 
     console.log(Chats);
         
@@ -65,7 +70,11 @@ exports.getCounts = async (req,res,next)=>{
   
     try{
       
-        const counts = await Chat.count();
+        const counts = await Chat.count({
+            where:{
+                UserId:req.user.id
+            }
+        });
         res.status(201).json(counts);
     }
     catch(error){

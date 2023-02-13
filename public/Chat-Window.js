@@ -65,7 +65,7 @@ form.addEventListener('submit',async(e)=>{
         const token = localStorage.getItem('token');
         const chat = e.target.chat.value;
         
-        console.log(token);
+       // console.log(token);
 
         const obj = {
             chat:chat
@@ -75,12 +75,12 @@ form.addEventListener('submit',async(e)=>{
         
         const count = await axios.get("http://localhost:3000/chat/getCount",{ headers: {"Authorization": token}});
         // console.log(response);
-        // console.log(count);
+        //console.log(count.data);
       
         const child1 = document.createElement('li');
         child1.appendChild(document.createTextNode(response.data.message));
 
-        if(count%2 === 0){
+        if(((count.data)%2) !== 0){
 
 
                 child1.style.backgroundColor = '#ccc';
@@ -88,7 +88,7 @@ form.addEventListener('submit',async(e)=>{
                 child1.style.backgroundColor = '#f4f4f4';
             }
     
-            message.appendChild(child1);
+            message1.appendChild(child1);
         }
     catch(error){
        console.log(error);
@@ -236,7 +236,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
        const groups = await axios.get("http://localhost:3000/group/getGroups",{headers: {"Authorization": token}});
 
-       console.log(groups);
+      // console.log(groups);
 
 
         for(let i=0; i<groups.data.length; i++){
@@ -260,16 +260,18 @@ window.addEventListener('DOMContentLoaded',async () => {
 
 async function getAllMessages(groupId){
 
-    console.log(groupId);
+   // console.log(groupId);
  try{
 
-    message2.innerHtml = '';
+  while(message2.hasChildNodes()){
+    message2.removeChild(message2.firstChild);
+  }
 
     const token = localStorage.getItem('token');
     
     const chats = await axios.get(`http://localhost:3000/group/getAllMessages?groupId=${groupId}`,{headers: {"Authorization": token}});
 
-    console.log(chats);
+   console.log(chats);
 
        for(let i=0; i<chats.data.length; i++){
         
@@ -291,7 +293,7 @@ async function getAllMessages(groupId){
     button.style.visibility  = "visible";
 
     const form1 = document.querySelectorAll('form');
-    console.log(form1[1]);
+  //  console.log(form1[1]);
     form1[1].addEventListener('submit',async(e)=>{
 
             e.preventDefault();
@@ -303,7 +305,7 @@ async function getAllMessages(groupId){
             }
 
           const response = await axios.post(`http://localhost:3000/chat/addGroupChat?id=${groupId}`,obj, {headers: {"Authorization": token}})
-          console.log(response);
+          //console.log(response);
         });
     }
  catch(error){
@@ -316,3 +318,42 @@ async function JoinGroup(){
 window.location.href = './group-join.html';
     
 }
+
+
+window.addEventListener("DOMContentLoaded",async()=>{
+   
+    try{
+      
+        const token = localStorage.getItem('token');
+
+        const response = await axios.get("http://localhost:3000/group/isAdmin",{headers: {"Authorization": token}});
+       
+        console.log(response);
+
+        const groups =[];
+        
+        for(let i=0; i<response.data.length; i++){
+            groups.push(response.data[i].GroupId);
+        }
+
+        localStorage.setItem('group',JSON.stringify(groups));
+
+        if(response.data[0].Admin === '1'){
+
+            const button = document.getElementById("Admin-button");
+            button.style.visibility  = "visible";
+
+            const form2 = document.querySelectorAll('form');
+            
+            form2[2].addEventListener("submit",async(e)=>{
+             
+                e.preventDefault();
+                
+                window.location.href = './admin.html';
+            });
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
+});
