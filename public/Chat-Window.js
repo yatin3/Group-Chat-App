@@ -25,7 +25,7 @@ const form = document.querySelector('form');
 //             chat:chat
 //         }
 
-//         const response = await axios.post("http://localhost:3000/chat/addChat",obj, {headers: {"Authorization": token}})
+//         const response = await axios.post("http://52.193.101.35:3000/chat/addChat",obj, {headers: {"Authorization": token}})
         
 //         let addToLocalStorage = JSON.parse(localStorage.getItem('Chat'));
 
@@ -35,7 +35,7 @@ const form = document.querySelector('form');
 
 //         console.log(JSON.parse(localStorage.getItem("Chat")));
 
-//         const count = await axios.get("http://localhost:3000/chat/getCount",{ headers: {"Authorization": token}});
+//         const count = await axios.get("http://52.193.101.35:3000/chat/getCount",{ headers: {"Authorization": token}});
 //         // console.log(response);
 //         // console.log(count);
       
@@ -71,9 +71,9 @@ form.addEventListener('submit',async(e)=>{
             chat:chat
         }
 
-        const response = await axios.post("http://localhost:3000/chat/addChat",obj, {headers: {"Authorization": token}})
+        const response = await axios.post("http://52.193.101.35:3000/chat/addChat",obj, {headers: {"Authorization": token}})
         
-        const count = await axios.get("http://localhost:3000/chat/getCount",{ headers: {"Authorization": token}});
+        const count = await axios.get("http://52.193.101.35:3000/chat/getCount",{ headers: {"Authorization": token}});
         // console.log(response);
         //console.log(count.data);
       
@@ -100,7 +100,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
     const token = localStorage.getItem('token');
 
-    const Chats = await axios.get("http://localhost:3000/chat/getChats",{ headers: {"Authorization": token}});
+    const Chats = await axios.get("http://52.193.101.35:3000/chat/getChats",{ headers: {"Authorization": token}});
 
     console.log(Chats.data);
     
@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
 //     if(LocalData === null){
 
-//       Chats = await axios.get(`http://localhost:3000/chat/getChats?getFrom=${0}`,{ headers: {"Authorization": token}});
+//       Chats = await axios.get(`http://52.193.101.35:3000/chat/getChats?getFrom=${0}`,{ headers: {"Authorization": token}});
 
 
 //      localStorage.setItem('Chat',JSON.stringify(Chats.data));
@@ -157,7 +157,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 //            }
 //         }
 
-//          Chats = await axios.get(`http://localhost:3000/chat/getChats?getFrom=${id}`,{ headers: {"Authorization": token}});
+//          Chats = await axios.get(`http://52.193.101.35:3000/chat/getChats?getFrom=${id}`,{ headers: {"Authorization": token}});
 
 //     }
 
@@ -204,7 +204,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
 //     message.innerHTML = '';
 
-//         const Chats = await axios.get("http://localhost:3000/chat/getChats",{ headers: {"Authorization": token}});
+//         const Chats = await axios.get("http://52.193.101.35:3000/chat/getChats",{ headers: {"Authorization": token}});
     
 //         for(let i=0; i<Chats.data.length; i++){
             
@@ -234,7 +234,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
         const token = localStorage.getItem('token');
 
-       const groups = await axios.get("http://localhost:3000/group/getGroups",{headers: {"Authorization": token}});
+       const groups = await axios.get("http://52.193.101.35:3000/group/getGroups",{headers: {"Authorization": token}});
 
       // console.log(groups);
 
@@ -269,7 +269,7 @@ async function getAllMessages(groupId){
 
     const token = localStorage.getItem('token');
     
-    const chats = await axios.get(`http://localhost:3000/group/getAllMessages?groupId=${groupId}`,{headers: {"Authorization": token}});
+    const chats = await axios.get(`http://52.193.101.35:3000/group/getAllMessages?groupId=${groupId}`,{headers: {"Authorization": token}});
 
    console.log(chats);
 
@@ -304,7 +304,7 @@ async function getAllMessages(groupId){
                 chat:chatty
             }
 
-          const response = await axios.post(`http://localhost:3000/chat/addGroupChat?id=${groupId}`,obj, {headers: {"Authorization": token}})
+          const response = await axios.post(`http://52.193.101.35:3000/chat/addGroupChat?id=${groupId}`,obj, {headers: {"Authorization": token}})
           //console.log(response);
         });
     }
@@ -326,7 +326,7 @@ window.addEventListener("DOMContentLoaded",async()=>{
       
         const token = localStorage.getItem('token');
 
-        const response = await axios.get("http://localhost:3000/group/isAdmin",{headers: {"Authorization": token}});
+        const response = await axios.get("http://52.193.101.35:3000/group/isAdmin",{headers: {"Authorization": token}});
        
         console.log(response);
 
