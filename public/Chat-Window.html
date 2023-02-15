@@ -17,28 +17,45 @@
        
     </ul>
 
+    <hr>
+
     <h2 style="color:#5F9EA0">Group mesage</h2>
     <ul id="message2">
        
     </ul>
 
+    <hr>
+   <p style="color:#ccaa7e">Create Personal Message</p>
     <form>
     <div class="input-group input-group-sm mb-3 ">
         <div class="align-bottom">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-sm">Chat</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="chat">
         <button type="submit" class="btn btn-primary" >Chat Added</button>
       </div>
     </div>
 
-   
+   </form>
+
+
+    <form>
+      <div class="form-group">
+        <label for="myfile">Select Files:</label>
+       <input type="file" id="myfile" name="myfile" required>
+       </div>
+       <button type="submit" class="btn btn-primary">Add File</button>
+  
     </form>
 
+     <hr>
+    <br>
+   <p style="color:#ccaa7e">Create Or Join Group</p>
     <button type="button" class="btn btn-primary" id="create">Create group</button>
     <button type="button" class="btn btn-primary" id="join">join group</button>
 
+    <hr>
+    <p style="color:#ccaa7e">Create Group Message</p>
     <form id="form">
          <div class="form-group">
          <input type="hidden" id="group-message" name="chatty" required>
@@ -46,15 +63,23 @@
          </div>
    </form>
 
+   <form id="form">
+    <div class="form-group">
+    <input type="hidden" id="groupFile" name="groupfile" required>
+    <button type="submit" style="visibility:hidden;" class="btn btn-primary" id="button12">group-File-Add</button>
+    </div>
+ </form>
+
+
    <form >
     <div class="form-group">
     <button type="submit" style="visibility:hidden;" class="btn btn-primary" id="Admin-button">GroupAdmin</button>
     </div>
 </form>
 
+<hr>
 
-
-
+ <p style="color:#ccaa7e">Groups Of Particular User</p>
   <div id="groups">
 
   </div>

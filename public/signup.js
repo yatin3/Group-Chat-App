@@ -16,7 +16,7 @@ form.addEventListener('submit',async(e)=>{
         password:password
       }
     
-     const res =  await axios.post("http://52.193.101.35:3000/user/signup",obj);
+     const res =  await axios.post("http://localhost:3000/user/signup",obj);
       document.body.innerHTML =  document.body.innerHTML + ` ${res.data.message}`;
 
       window.alert("Successfully signed up");

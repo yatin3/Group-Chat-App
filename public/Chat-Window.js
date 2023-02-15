@@ -25,7 +25,7 @@ const form = document.querySelector('form');
 //             chat:chat
 //         }
 
-//         const response = await axios.post("http://52.193.101.35:3000/chat/addChat",obj, {headers: {"Authorization": token}})
+//         const response = await axios.post("http://localhost:3000/chat/addChat",obj, {headers: {"Authorization": token}})
         
 //         let addToLocalStorage = JSON.parse(localStorage.getItem('Chat'));
 
@@ -35,7 +35,7 @@ const form = document.querySelector('form');
 
 //         console.log(JSON.parse(localStorage.getItem("Chat")));
 
-//         const count = await axios.get("http://52.193.101.35:3000/chat/getCount",{ headers: {"Authorization": token}});
+//         const count = await axios.get("http://localhost:3000/chat/getCount",{ headers: {"Authorization": token}});
 //         // console.log(response);
 //         // console.log(count);
       
@@ -71,9 +71,9 @@ form.addEventListener('submit',async(e)=>{
             chat:chat
         }
 
-        const response = await axios.post("http://52.193.101.35:3000/chat/addChat",obj, {headers: {"Authorization": token}})
+        const response = await axios.post("http://localhost:3000/chat/addChat",obj, {headers: {"Authorization": token}})
         
-        const count = await axios.get("http://52.193.101.35:3000/chat/getCount",{ headers: {"Authorization": token}});
+        const count = await axios.get("http://localhost:3000/chat/getCount",{ headers: {"Authorization": token}});
         // console.log(response);
         //console.log(count.data);
       
@@ -100,9 +100,12 @@ window.addEventListener('DOMContentLoaded',async () => {
 
     const token = localStorage.getItem('token');
 
-    const Chats = await axios.get("http://52.193.101.35:3000/chat/getChats",{ headers: {"Authorization": token}});
+    const Chats = await axios.get("http://localhost:3000/chat/getChats",{ headers: {"Authorization": token}});
+
+    const Files = await axios.get("http://localhost:3000/file/getFiles",{ headers: {"Authorization": token}});
 
     console.log(Chats.data);
+    console.log(Files.data);
     
 
     for(let i=0; i<Chats.data.length; i++){
@@ -117,6 +120,17 @@ window.addEventListener('DOMContentLoaded',async () => {
 
         message1.appendChild(child1);
     }
+
+    for(let i=0; i<Files.data.length; i++){
+        const anchor = document.createElement('A');
+        const t = document.createTextNode(`files${i+1}`);
+        anchor.setAttribute("href",Files.data[i].files);
+        anchor.appendChild(t);
+
+        anchor.style.backgroundColor = 'violet';
+
+        message1.appendChild(anchor);
+    }
 })
 
 // window.addEventListener('DOMContentLoaded',async () => {
@@ -130,7 +144,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
 //     if(LocalData === null){
 
-//       Chats = await axios.get(`http://52.193.101.35:3000/chat/getChats?getFrom=${0}`,{ headers: {"Authorization": token}});
+//       Chats = await axios.get(`http://localhost:3000/chat/getChats?getFrom=${0}`,{ headers: {"Authorization": token}});
 
 
 //      localStorage.setItem('Chat',JSON.stringify(Chats.data));
@@ -157,7 +171,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 //            }
 //         }
 
-//          Chats = await axios.get(`http://52.193.101.35:3000/chat/getChats?getFrom=${id}`,{ headers: {"Authorization": token}});
+//          Chats = await axios.get(`http://localhost:3000/chat/getChats?getFrom=${id}`,{ headers: {"Authorization": token}});
 
 //     }
 
@@ -204,7 +218,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
 //     message.innerHTML = '';
 
-//         const Chats = await axios.get("http://52.193.101.35:3000/chat/getChats",{ headers: {"Authorization": token}});
+//         const Chats = await axios.get("http://localhost:3000/chat/getChats",{ headers: {"Authorization": token}});
     
 //         for(let i=0; i<Chats.data.length; i++){
             
@@ -234,7 +248,7 @@ window.addEventListener('DOMContentLoaded',async () => {
 
         const token = localStorage.getItem('token');
 
-       const groups = await axios.get("http://52.193.101.35:3000/group/getGroups",{headers: {"Authorization": token}});
+       const groups = await axios.get("http://localhost:3000/group/getGroups",{headers: {"Authorization": token}});
 
       // console.log(groups);
 
@@ -269,7 +283,11 @@ async function getAllMessages(groupId){
 
     const token = localStorage.getItem('token');
     
-    const chats = await axios.get(`http://52.193.101.35:3000/group/getAllMessages?groupId=${groupId}`,{headers: {"Authorization": token}});
+    const chats = await axios.get(`http://localhost:3000/group/getAllMessages?groupId=${groupId}`,{headers: {"Authorization": token}});
+    
+    const groupAllFiles = await axios.get(`http://localhost:3000/file/getAllFiles?groupId=${groupId}`,{headers: {"Authorization": token}});
+
+    console.log(groupAllFiles);
 
    console.log(chats);
 
@@ -286,15 +304,32 @@ async function getAllMessages(groupId){
         message2.appendChild(child1);
     }
 
+    for(let i=0; i<groupAllFiles.data.length; i++){
+        const anchor = document.createElement('A');
+        const t = document.createTextNode(`files${i+1}`);
+        anchor.setAttribute("href",groupAllFiles.data[i].files);
+        anchor.appendChild(t);
+
+        anchor.style.backgroundColor = 'violet';
+
+        message2.appendChild(anchor);
+    }
+
     const input = document.getElementById("group-message");
     input.type="text";
 
     const button = document.getElementById("button");
     button.style.visibility  = "visible";
 
-    const form1 = document.querySelectorAll('form');
+    const input1 = document.getElementById("groupFile");
+    input1.type = "file";
+
+    const button12 = document.getElementById("button12");
+    button12.style.visibility = "visible";
+
+    const form2 = document.querySelectorAll('form');
   //  console.log(form1[1]);
-    form1[1].addEventListener('submit',async(e)=>{
+    form2[2].addEventListener('submit',async(e)=>{
 
             e.preventDefault();
             
@@ -304,13 +339,27 @@ async function getAllMessages(groupId){
                 chat:chatty
             }
 
-          const response = await axios.post(`http://52.193.101.35:3000/chat/addGroupChat?id=${groupId}`,obj, {headers: {"Authorization": token}})
+          const response = await axios.post(`http://localhost:3000/chat/addGroupChat?id=${groupId}`,obj, {headers: {"Authorization": token}})
           //console.log(response);
         });
+
+ const form3 = document.querySelectorAll('form');
+  form3[3].addEventListener('submit',async(e)=>{
+    
+    e.preventDefault();
+    const groupfile = e.target.groupfile.value;
+
+    const obj1 = {
+        groupfile:groupfile
     }
- catch(error){
-    console.log(error);
- }
+
+    const response = await axios.post(`http://localhost:3000/file/uploadGroupFile?id=${groupId}`,obj1,{headers: {"Authorization": token}})
+  });
+
+}
+catch(error){
+   console.log(error);
+}
 };
     
 async function JoinGroup(){
@@ -326,7 +375,7 @@ window.addEventListener("DOMContentLoaded",async()=>{
       
         const token = localStorage.getItem('token');
 
-        const response = await axios.get("http://52.193.101.35:3000/group/isAdmin",{headers: {"Authorization": token}});
+        const response = await axios.get("http://localhost:3000/group/isAdmin",{headers: {"Authorization": token}});
        
         console.log(response);
 
@@ -343,9 +392,9 @@ window.addEventListener("DOMContentLoaded",async()=>{
             const button = document.getElementById("Admin-button");
             button.style.visibility  = "visible";
 
-            const form2 = document.querySelectorAll('form');
+            const form4 = document.querySelectorAll('form');
             
-            form2[2].addEventListener("submit",async(e)=>{
+            form4[4].addEventListener("submit",async(e)=>{
              
                 e.preventDefault();
                 
@@ -356,4 +405,22 @@ window.addEventListener("DOMContentLoaded",async()=>{
     catch(error){
         console.log(error);
     }
+});
+
+const form1 = document.querySelectorAll('form');
+
+form1[1].addEventListener('submit',async(e)=>{
+
+    const token = localStorage.getItem('token');
+    e.preventDefault();
+    const file = e.target.myfile.value;
+
+    //const file = document.getElementById('myfile').FILES[0].NAME;
+    
+    console.log(file);
+    const obj = {
+        image:"C/Users/yatingoyal/Pictures/yatipic.jpg"
+    }
+    
+    await axios.post("http://localhost:3000/file/upload",obj,{headers: {"Authorization": token}});
 });

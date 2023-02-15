@@ -5,6 +5,8 @@ exports.authenticate = async(req,res,next)=>{
 
     try{
         const token = req.header('Authorization');
+
+        console.log(token);
         
         const userIdentity = jwt.verify(token,process.env.TOKEN_KEY);
 
