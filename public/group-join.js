@@ -5,7 +5,7 @@ try{
 
     const token = localStorage.getItem('token');
 
-   const groups = await axios.get("http://localhost:3000/group/getAllGroups",{headers: {"Authorization": token}});
+   const groups = await axios.get("http://52.193.101.35:3000/group/getAllGroups",{headers: {"Authorization": token}});
 
    console.log(groups);
 
@@ -38,7 +38,7 @@ async function JoiningGroup(id){
             id:id
         }
 
-       const response =  await axios.post("http://localhost:3000/group/joinGroup",obj,{headers: {"Authorization": token}});
+       const response =  await axios.post("http://52.193.101.35:3000/group/joinGroup",obj,{headers: {"Authorization": token}});
 
        console.log(response);
 

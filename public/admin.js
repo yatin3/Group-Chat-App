@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded",async()=>{
    
     try{
         const token = localStorage.getItem('token');
-        const UserName = await axios.get("http://localhost:3000/user/getAllUsers",{headers: {"Authorization": token}});
+        const UserName = await axios.get("http://52.193.101.35:3000/user/getAllUsers",{headers: {"Authorization": token}});
 
         console.log(UserName);
 
@@ -60,7 +60,7 @@ form[0].addEventListener('submit',async(e)=>{
             userId:userId
         }
        
-        await axios.post(`http://localhost:3000/group/AddUser`,obj,{headers: {"Authorization": token}});
+        await axios.post(`http://52.193.101.35:3000/group/AddUser`,obj,{headers: {"Authorization": token}});
         window.location.href = "Chat-Window.html";
     
     }
@@ -97,7 +97,7 @@ form[1].addEventListener('submit',async(e)=>{
             userId:userId
         }
        
-        await axios.post(`http://localhost:3000/group/makeAdmin`,obj,{headers: {"Authorization": token}});
+        await axios.post(`http://52.193.101.35:3000/group/makeAdmin`,obj,{headers: {"Authorization": token}});
     
     }
     catch(error){
@@ -133,7 +133,7 @@ form[2].addEventListener('submit',async(e)=>{
             userId:userId
         }
        
-        await axios.post(`http://localhost:3000/group/deleteUser`,obj,{headers: {"Authorization": token}});
+        await axios.post(`http://52.193.101.35:3000/group/deleteUser`,obj,{headers: {"Authorization": token}});
 
         window.location.href = 'Chat-Window.html';
     
